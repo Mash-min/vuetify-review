@@ -12,13 +12,7 @@
 
     <body>
         <div id="app">
-            <v-toolbar class="bg-green-darken-1">
-                <v-app-bar-nav-icon>
-                    <i class="fa fa-bars" aria-hidden="true"></i>
-                </v-app-bar-nav-icon>
-
-                <v-toolbar-title>Manage Branch</v-toolbar-title>
-            </v-toolbar>
+            <Navbar title="Manage Branch" @toggle="drawer = !drawer"></Navbar>
 
             <div class="pa-1">
                 <v-text-field
@@ -127,6 +121,31 @@
                     @update="searchUser"
                 ></v-combobox>
             </div>
+
+            <v-layout>
+                <v-navigation-drawer v-model="drawer" temporary>
+                    <v-list-item title="Admin Panel"></v-list-item>
+
+                    <v-divider></v-divider>
+
+                    <v-expansion-panels variant="accordion">
+                        <v-expansion-panel title="Branches">
+                            <v-expansion-panel-text>
+                                <v-list to="#">asdasd</v-list>
+                            </v-expansion-panel-text>
+                        </v-expansion-panel>
+                        <v-expansion-panel title="Accounting">
+                            <v-card>
+                                <v-list to="#">asdasd</v-list>
+                            </v-card>
+                        </v-expansion-panel>
+                        <v-expansion-panel
+                            title="Human Resource"
+                            text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima"
+                        ></v-expansion-panel>
+                    </v-expansion-panels>
+                </v-navigation-drawer>
+            </v-layout>
         </div>
     </body>
 

@@ -1,6 +1,6 @@
 const { createApp, ref, toRaw, reactive, onMounted } = Vue
 const { createVuetify } = Vuetify
-// import searchInput from './components/search-input.js'
+import Navbar from './components/navbar.js'
 
 const vuetify = createVuetify()
 
@@ -23,6 +23,8 @@ const app = createApp({
             name: '',
         }
 
+        const drawer = ref(false)
+
         const checkbox = false
 
         const users = [
@@ -35,11 +37,6 @@ const app = createApp({
                 name: 'Merry Grace Delos Santos',
             },
         ]
-
-        function search() {
-            console.log('Working')
-        }
-
         function submit() {
             console.log(toRaw(modelData))
         }
@@ -52,26 +49,15 @@ const app = createApp({
             console.log('Working')
         }
 
-        onMounted(() => {
-            $.ajax({
-                type: 'GET',
-                url: `https://dummyjson.com/users?limit=10`,
-                dataType: 'json',
-            }).then((response) => {
-                modelData['users'].items = response.users.map((user) => ({
-                    id: user.id,
-                    name: user.firstName + ' ' + user.lastName,
-                }))
-                console.log(response.users)
-            })
-        })
+        function search() {}
 
         return {
+            search,
+            drawer,
             modelData,
             title,
             users,
             checkbox,
-            search,
             selectedItem,
             submit,
             addItem,
@@ -80,7 +66,7 @@ const app = createApp({
         }
     },
     components: {
-        // searchInput: searchInput
+        navbar: Navbar,
     },
 })
     .use(vuetify)
