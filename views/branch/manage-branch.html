@@ -123,7 +123,7 @@
             </div>
 
             <v-layout>
-                <v-navigation-drawer v-model="drawer" temporary>
+                <v-navigation-drawer v-model="drawer" temporary :width="350">
                     <v-list-item title="Admin Panel"></v-list-item>
 
                     <v-divider></v-divider>
@@ -135,14 +135,15 @@
                             </v-expansion-panel-text>
                         </v-expansion-panel>
                         <v-expansion-panel title="Accounting">
-                            <v-card>
+                            <v-expansion-panel-text>
                                 <v-list to="#">asdasd</v-list>
-                            </v-card>
+                            </v-expansion-panel-text>
                         </v-expansion-panel>
-                        <v-expansion-panel
-                            title="Human Resource"
-                            text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima"
-                        ></v-expansion-panel>
+                        <v-expansion-panel title="Human Resource">
+                            <v-expansion-panel-text>
+                                <v-list to="#">asdasd</v-list>
+                            </v-expansion-panel-text>
+                        </v-expansion-panel>
                     </v-expansion-panels>
                 </v-navigation-drawer>
             </v-layout>
