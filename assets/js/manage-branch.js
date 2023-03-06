@@ -1,73 +1,115 @@
-const { createApp, ref, toRaw, reactive, onMounted } = Vue
-const { createVuetify } = Vuetify
-import Navbar from './components/navbar.js'
+const dummyData = () => {
+    const data = []
 
-const vuetify = createVuetify()
-
-const data = [1, 2, 23, 4, 5, 6]
-
-const app = createApp({
-    setup() {
-        const title = 'Manage Branch'
-
-        const modelData = reactive({
-            users: {
-                label: 'Users',
-                value: null,
-                items: [],
+    for (let x = 1; x < 100; x++) {
+        data.push({
+            id: x,
+            name: `Branch #${x}`,
+            address: `Sample Address, BLK ${x} LOT ${x}`,
+            pricelist: `PRICELIST-${x}`,
+            storecode: `STORECODE-${x}`,
+            area: `AREA-${x}`,
+            area2: `AREA-${x}-2`,
+            supervisor: {
+                id: x,
+                name: `SAMPLE USER ${x}`,
             },
         })
+    }
 
-        const selectedItem = {
-            id: '',
-            name: '',
-        }
+    return data
+}
 
-        const drawer = ref(false)
-
-        const checkbox = false
-
-        const users = [
-            {
-                id: 1,
-                name: 'Mashiyyat Delos Santos',
+const dataTable = {
+    model: 'branch',
+    withModel: [{ text: 'supervisor', field: 'finger', ref: 'sic', row: 'id' }],
+    headers: [
+        { text: 'ID', value: 'id' },
+        { text: 'NAME', value: 'name' },
+        { text: 'ADDRESS', value: 'address' },
+        { text: 'PRICELIST', value: 'pricelist' },
+        { text: 'STORECODE', value: 'storecode' },
+        { text: 'AREA1', value: 'area' },
+        { text: 'AREA2', value: 'area2' },
+        { text: 'ADDRESS', value: 'address' },
+        { text: 'SUPERVISOR', value: 'supervisor.name' },
+        { text: 'Operation', value: 'operation' },
+    ],
+    items: dummyData(),
+    modal: {
+        fields: {
+            id: {
+                type: 'number',
+                attributes: {
+                    col: 4,
+                    disabled: true,
+                    text: 'ID',
+                },
             },
-            {
-                id: 2,
-                name: 'Merry Grace Delos Santos',
+            name: {
+                type: 'input',
+                text: 'NAME',
+                attributes: {
+                    col: 8,
+                    text: 'NAME',
+                    required: true,
+                },
             },
-        ]
-        function submit() {
-            console.log(toRaw(modelData))
-        }
-
-        function addItem() {
-            modelData['users'].items.push({ id: 5, name: 'Random Name' })
-        }
-
-        function searchUser() {
-            console.log('Working')
-        }
-
-        function search() {}
-
-        return {
-            search,
-            drawer,
-            modelData,
-            title,
-            users,
-            checkbox,
-            selectedItem,
-            submit,
-            addItem,
-            modelData,
-            searchUser,
-        }
+            supervisor: {
+                type: 'combobox',
+                attributes: {
+                    col: 12,
+                    text: 'SUPERVISOR',
+                    multiple: false,
+                    required: true,
+                },
+                method: {
+                    field: 'finger',
+                    row: 'nome',
+                    operator: 'LIKE',
+                    required: true,
+                },
+            },
+            address: {
+                type: 'textarea',
+                attributes: {
+                    col: 6,
+                    text: 'ADDRESS',
+                    required: true,
+                },
+            },
+            pricelist: {
+                type: 'input',
+                attributes: {
+                    col: 6,
+                    text: 'PRICELIST',
+                    required: true,
+                },
+            },
+            storecode: {
+                type: 'input',
+                attributes: {
+                    col: 12,
+                    text: 'STORECODE',
+                    required: true,
+                },
+            },
+            area: {
+                type: 'input',
+                attributes: {
+                    col: 6,
+                    text: 'AREA',
+                    required: true,
+                },
+            },
+            area2: {
+                type: 'input',
+                attributes: {
+                    col: 6,
+                    text: 'AREA-2',
+                    required: true,
+                },
+            },
+        },
     },
-    components: {
-        navbar: Navbar,
-    },
-})
-    .use(vuetify)
-    .mount('#app')
+}
