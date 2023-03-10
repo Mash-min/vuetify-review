@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Panel</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@3.1.6/dist/vuetify.min.css" />
+        <link rel="stylesheet" href="../../assets/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/vue-easytable/libs/theme-default/index.css" />
+    </head>
+
+    <body>
+        <div id="app">
+            <n-layout class="pa-2">
+                <n-breadcrumb>
+                    <router-link :to="link.to" v-for="link in links" class="link-button">
+                        <n-breadcrumb-item>
+                            {{ link.title }}
+                            <i class="fa fa-chevron-right ma-5"></i>
+                        </n-breadcrumb-item>
+                    </router-link>
+                </n-breadcrumb>
+            </n-layout>
+
+            <div class="pa-2">
+                <router-view></router-view>
+            </div>
+        </div>
+    </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue-router@4.0.15/dist/vue-router.global.js"></script>
+    <script src="https://unpkg.com/naive-ui"></script>
+    <script type="module">
+        const { createApp, ref, h, reactive } = Vue
+        const { NButton } = naive
+
+        import Crud from './crud.js'
+
+        const routes = [
+            {
+                path: '/',
+                component: Crud,
+                props: {
+                    title: 'Manage Branch',
+                    model: 'products',
+                    url: 'https://dummyjson.com/products',
+                    columns: [
+                        { title: 'ID', key: 'id' },
+                        { title: 'Title', key: 'title' },
+                        { title: 'Brand', key: 'brand' },
+                        { title: 'Category', key: 'category' },
+                        { title: 'Price', key: 'price' },
+                        { title: 'Rating', key: 'rating' },
+                        { title: 'Stock', key: 'stock' },
+                    ],
+                },
+            },
+            {
+                path: '/branch',
+                component: Crud,
+                props: {
+                    title: 'Manage Branch',
+                    model: 'products',
+                    url: 'https://dummyjson.com/products',
+                    columns: [
+                        { title: 'ID', key: 'id' },
+                        { title: 'Title', key: 'title' },
+                        { title: 'Brand', key: 'brand' },
+                        { title: 'Category', key: 'category' },
+                        { title: 'Price', key: 'price' },
+                        { title: 'Rating', key: 'rating' },
+                        { title: 'Stock', key: 'stock' },
+                    ],
+                },
+            },
+            {
+                path: '/accounting',
+                component: Crud,
+                props: {
+                    title: 'Accounting',
+                    model: 'carts',
+                    url: 'https://dummyjson.com/carts',
+                    columns: [
+                        { title: 'ID', key: 'id' },
+                        { title: 'Total Quantity', key: 'totalQuantity' },
+                        { title: 'Discounted Total', key: 'discountedTotal' },
+                        { title: 'Total', key: 'total' },
+                    ],
+                },
+            },
+            {
+                path: '/human-resource',
+                component: Crud,
+                props: {
+                    title: 'Human Resource',
+                    model: 'users',
+                    url: 'https://dummyjson.com/users',
+                    columns: [
+                        { title: 'ID', key: 'id' },
+                        { title: 'FIRSTNAME', key: 'firstName' },
+                        { title: 'LASTNAME', key: 'lastName' },
+                        { title: 'EMAIL', key: 'email' },
+                        { title: 'GENDER', key: 'gender' },
+                        { title: 'PHONE', key: 'phone' },
+                        { title: 'AGE', key: 'age' },
+                        { title: 'BIRTHDATE', key: 'birthDate' },
+                    ],
+                },
+            },
+        ]
+
+        const router = VueRouter.createRouter({
+            history: VueRouter.createWebHashHistory(),
+            hash: false,
+            routes,
+        })
+
+        const app = createApp({
+            setup() {
+                const links = ref([
+                    { title: 'Manage Branch', to: '/branch' },
+                    { title: 'Accounting', to: '/accounting' },
+                    { title: 'Human Resource', to: '/human-resource' },
+                ])
+
+                return {
+                    links,
+                }
+            },
+        })
+
+        app.use(naive)
+        app.use(router)
+        app.mount('#app')
+    </script>
+
+    <style scoped>
+        .n-layout-header,
+        .n-layout-footer {
+            border-bottom: 0.5px solid rgb(226, 226, 226);
+            padding: 24px;
+        }
+
+        .n-layout-sider {
+            background: rgba(128, 128, 128, 0.3);
+        }
+
+        .n-layout-content {
+            background: rgba(128, 128, 128, 0.4);
+        }
+
+        .link-button {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</html>
